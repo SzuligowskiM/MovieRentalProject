@@ -22,6 +22,8 @@ public class MovieService {
     public List<Movie> find(){
         return movieRepository.findAll();
     }
+    public List<Movie> findByCategory(String category){return movieRepository.findByCategory(category);}
+    public List<Movie> findByTitle(String title){return movieRepository.findByTitle(title);}
     @Transactional
     public void save(Movie movie){
         movieRepository.save(movie);

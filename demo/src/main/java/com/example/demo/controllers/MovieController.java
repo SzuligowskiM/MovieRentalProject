@@ -27,6 +27,19 @@ public class MovieController {
         if(movies.isEmpty()) ResponseEntity.noContent().build();
         return ResponseEntity.ok(movies);
     }
+    @GetMapping(value = "category/{category}")
+    public ResponseEntity<List<Movie>> getMoviesByCategory(@PathVariable String category) {
+        List<Movie> movies = movieService.findByCategory(category);
+        if(movies.isEmpty()) ResponseEntity.noContent().build();
+        return ResponseEntity.ok(movies);
+    }
+
+    @GetMapping(value = "title/{title}")
+    public ResponseEntity<List<Movie>> getMoviesByTitle(@PathVariable String title) {
+        List<Movie> movies = movieService.findByTitle(title);
+        if(movies.isEmpty()) ResponseEntity.noContent().build();
+        return ResponseEntity.ok(movies);
+    }
 
     @PostMapping()
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {

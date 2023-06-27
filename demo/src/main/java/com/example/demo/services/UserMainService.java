@@ -19,6 +19,10 @@ public class UserMainService {
         return userMainRepository.findById(Id);
     }
 
+    public Optional<UserMain> findByUserCredentialEmail(String email){
+        return userMainRepository.findByUserCredentialEmail(email);
+    }
+
     public List<UserMain> find(){
         return userMainRepository.findAll();
     }
