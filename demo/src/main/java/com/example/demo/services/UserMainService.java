@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.OrderMain;
 import com.example.demo.models.UserMain;
 import com.example.demo.repositories.UserMainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ public class UserMainService {
     public Optional<UserMain> findByUserCredentialEmail(String email){
         return userMainRepository.findByUserCredentialEmail(email);
     }
-
+    public Optional<List<OrderMain>> findOrdersByUserId(Long userId) {
+        return userMainRepository.findOrdersByUserId(userId);
+    }
     public List<UserMain> find(){
         return userMainRepository.findAll();
     }
@@ -39,9 +42,10 @@ public class UserMainService {
             foundUser.get().setSurname(userMain.getSurname());
             foundUser.get().setOrderMains(userMain.getOrderMains());
             foundUser.get().setUserCredential(userMain.getUserCredential());
+            foundUser.get().setBalance(userMain.getBalance());
             userMainRepository.save(foundUser.get());
         }
-        throw new Exception("USER NOT FOUND");
+        else throw new Exception("USER NOT FOUND");
     }
 
     @Transactional
@@ -50,7 +54,7 @@ public class UserMainService {
         if(foundUser.isPresent()){
             userMainRepository.delete(foundUser.get());
         }
-        throw new Exception("USER NOT FOUND");
+        else throw new Exception("USER NOT FOUND");
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
+import com.example.demo.models.OrderMain;
 import com.example.demo.models.UserMain;
 import com.example.demo.services.UserMainService;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/UserMain")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class UserMainController {
     @Autowired
     private UserMainService userMainService;
@@ -21,6 +24,19 @@ public class UserMainController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping(value = "/{Id}/orderMains")
+    public ResponseEntity<Optional<List<OrderMain>>> getMainUserOrderMainsById(@PathVariable Long Id) {
+        Optional<List<OrderMain>> orderMains = userMainService.findOrdersByUserId(Id);
+        if(orderMains.isPresent()) return ResponseEntity.ok(orderMains);
+        else return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping(value = "/email/{email}")
+    public ResponseEntity<Optional<UserMain>> getMainUserByCredentialEmail(@PathVariable String email) {
+        Optional<UserMain> user = userMainService.findByUserCredentialEmail(email);
+        if(user.isPresent()) return ResponseEntity.ok(user);
+        return ResponseEntity.notFound().build();
+    }
     @GetMapping()
     public ResponseEntity<List<UserMain>> getAllMainUsers() {
         List<UserMain> users = userMainService.find();

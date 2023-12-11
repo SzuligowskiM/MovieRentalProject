@@ -26,12 +26,14 @@ public class UserMain implements UserDetails {
     private List<OrderMain> orderMains;
     @OneToOne
     private UserCredential userCredential;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
+    private String role;
+    @NonNull
+    Double balance;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override

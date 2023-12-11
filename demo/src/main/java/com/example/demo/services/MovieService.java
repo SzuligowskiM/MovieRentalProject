@@ -39,7 +39,7 @@ public class MovieService {
             foundMovie.get().setPrice(movie.getPrice());
             movieRepository.save(foundMovie.get());
         }
-        throw new Exception("MOVIE NOT FOUND");
+        else throw new Exception("MOVIE NOT FOUND");
     }
 
     @Transactional
@@ -48,6 +48,6 @@ public class MovieService {
         if(foundMovie.isPresent()){
             movieRepository.delete(foundMovie.get());
         }
-        throw new Exception("MOVIE NOT FOUND");
+        else throw new Exception("MOVIE NOT FOUND");
     }
 }

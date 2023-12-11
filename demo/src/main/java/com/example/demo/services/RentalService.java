@@ -35,7 +35,7 @@ public class RentalService {
             foundRental.get().setExpDate(rental.getExpDate());
             rentalRepository.save(foundRental.get());
         }
-        throw new Exception("RENTAL NOT FOUND");
+        else throw new Exception("RENTAL NOT FOUND");
     }
 
     @Transactional
@@ -44,6 +44,6 @@ public class RentalService {
         if(foundRental.isPresent()){
             rentalRepository.delete(foundRental.get());
         }
-        throw new Exception("RENTAL NOT FOUND");
+        else throw new Exception("RENTAL NOT FOUND");
     }
 }

@@ -35,7 +35,7 @@ public class OrderMainService {
             foundOrder.get().setOrderDate(orderMain.getOrderDate());
             orderMainRepository.save(foundOrder.get());
         }
-        throw new Exception("ORDER NOT FOUND");
+        else throw new Exception("ORDER NOT FOUND");
     }
 
     @Transactional
@@ -44,7 +44,7 @@ public class OrderMainService {
         if(foundOrder.isPresent()){
             orderMainRepository.delete(foundOrder.get());
         }
-        throw new Exception("ORDER NOT FOUND");
+        else throw new Exception("ORDER NOT FOUND");
     }
 
 

@@ -35,7 +35,7 @@ public class UserCredentialService {
             foundUserCredential.get().setPassword(userCredential.getPassword());
             userCredentialRepository.save(foundUserCredential.get());
         }
-        throw new Exception("USER CREDENTIAL NOT FOUND");
+        else throw new Exception("USER CREDENTIAL NOT FOUND");
     }
 
     @Transactional
@@ -44,6 +44,6 @@ public class UserCredentialService {
         if(foundUserCredential.isPresent()){
             userCredentialRepository.delete(foundUserCredential.get());
         }
-        throw new Exception("USER CREDENTIAL NOT FOUND");
+        else throw new Exception("USER CREDENTIAL NOT FOUND");
     }
 }
